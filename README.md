@@ -1,57 +1,67 @@
-#include &lt;stdio.h&gt;
-int main() {
-int foodChoice, quantity;
-float totalBill = 0.0, tax = 0.1, discount = 0.05;
-// Displaying the menu
-printf(&quot;Hotel Food Billing System\n&quot;);
-printf(&quot;Menu:\n&quot;);
-printf(&quot;1. Pizza ($10)\n&quot;);
-printf(&quot;2. Burger ($5)\n&quot;);
-printf(&quot;3. Pasta ($7)\n&quot;);
-printf(&quot;4. Salad ($3)\n&quot;);
-printf(&quot;5. Exit\n&quot;);
-// Read user input for menu selection
+#include <stdio.h>
 
-do {
-printf(&quot;Enter your choice (1-5): &quot;);
-scanf(&quot;%d&quot;, &amp;foodChoice);
-// Handle food selection
-if (foodChoice &gt;= 1 &amp;&amp; foodChoice &lt;= 4) {
-printf(&quot;Enter quantity: &quot;);
-scanf(&quot;%d&quot;, &amp;quantity);
-// Process the food item and update the total bill
-switch(foodChoice) {
-case 1:
-totalBill += 10 * quantity;
-break;
-case 2:
-totalBill += 5 * quantity;
-break;
-case 3:
-totalBill += 7 * quantity;
-break;
-case 4:
-totalBill += 3 * quantity;
-break;
-}
-} else if (foodChoice == 5) {
-break;
-} else {
-printf(&quot;Invalid choice. Please try again.\n&quot;);
-}
-} while (foodChoice != 5);
-// Calculate taxes and discounts
-float taxAmount = totalBill * tax;
-float discountAmount = totalBill * discount;
-// Final bill calculation
-totalBill += taxAmount - discountAmount;
-// Displaying the final bill
-printf(&quot;\nFinal Bill:\n&quot;);
-printf(&quot;Total Food Cost: $%.2f\n&quot;, totalBill - taxAmount +
-discountAmount);
-printf(&quot;Tax (10%%): $%.2f\n&quot;, taxAmount);
-printf(&quot;Discount (5%%): -$%.2f\n&quot;, discountAmount);
-printf(&quot;Total Bill: $%.2f\n&quot;, totalBill);
-return 0;
-}
+int main() {
+    int choice;
+    int quantity;
+    float total = 0, price;
+    char more;
+
+    printf("\n====== WELCOME TO HOTEL FOOD BILLING SYSTEM ======\n");
+
+    do {
+        printf("\n-------------- MENU --------------\n");
+        printf("1. Burger        - 120 Rs\n");
+        printf("2. Pizza         - 250 Rs\n");
+        printf("3. Pasta         - 180 Rs\n");
+        printf("4. Sandwich      - 100 Rs\n");
+        printf("5. Coffee        - 80 Rs\n");
+        printf("-----------------------------------\n");
+
+        printf("Enter your choice (1-5): ");
+        scanf("%d", &choice);
+
+        switch(choice) {
+            case 1:
+                price = 120;
+                break;
+            case 2:
+                price = 250;
+                break;
+            case 3:
+                price = 180;
+                break;
+            case 4:
+                price = 100;
+                break;
+            case 5:
+                price = 80;
+                break;
+            default:
+                printf("Invalid choice!\n");
+                price = 0;
+        }
+
+        if(price != 0) {
+            printf("Enter quantity: ");
+            scanf("%d", &quantity);
+            total += price * quantity;
+            printf("Item added to bill!\n");
+        }
+
+        printf("Do you want to order more? (y/n): ");
+        scanf(" %c", &more);
+
+    } while(more == 'y' || more == 'Y');
+
+    float tax = total * 0.05;  // 5% tax
+    float grandTotal = total + tax;
+
+    printf("\n============= BILL =============\n");
+    printf("Total Amount  : Rs %.2f\n", total);
+    printf("GST (5%%)      : Rs %.2f\n", tax);
+    printf("Grand Total   : Rs %.2f\n", grandTotal);
+    printf("================================\n");
+    printf("Thank you! Visit Again 😊\n");
+
+    return 0;
 }
